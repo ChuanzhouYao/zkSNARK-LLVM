@@ -1,0 +1,35 @@
+//===-- FieldTypes.def - Metadata about FieldTypes ----------*- C++ -*-===//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+//
+//  This file defines the list of Galois field types
+//
+//  Custom code should define this macros:
+//
+//    FIELD_TYPE(Name, Id, SingletonId) - A type for Galois field elements
+//    with a given Name
+//
+//===----------------------------------------------------------------------===//
+
+#ifndef FIELD_TYPE
+#define FIELD_TYPE(Name, Id, SingletonId)
+#endif
+
+#define GALOIS_FIELD_TYPE(Name, EnumId, SingletonId, FrontendId)  \
+FIELD_TYPE(Name, FrontendId, FrontendId##Ty)
+#include "llvm/IR/GaloisFieldTypes.def"
+
+#undef FIELD_TYPE
+
+#ifndef FIELD_TYPE_MARKER
+#define FIELD_TYPE_MARKER(Marker, Value)
+#endif
+
+FIELD_TYPE_MARKER(FieldFirstType, FPallasbase)
+FIELD_TYPE_MARKER(FieldLastType, FCurve25519scalar)
+
+#undef FIELD_TYPE_MARKER

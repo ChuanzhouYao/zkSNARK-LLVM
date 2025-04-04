@@ -1,0 +1,38 @@
+//= llvm/GaloisFieldTypes.def - File that describes GaloisFieldType -*- C++ -=//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the list of Galois field types.
+// Use this macros to handle the elements:
+//
+// GALOIS_FIELD_TYPE(Name, EnumId, SingletonId, FrontendId)
+//
+//===----------------------------------------------------------------------===//
+
+// NOTE: NO INCLUDE GUARD DESIRED!
+
+// Provide definitions of macros so that users of this file do not have to
+// define everything to use it...
+//
+
+#ifndef GALOIS_FIELD_TYPE
+#define GALOIS_FIELD_TYPE(Name, EnumId, SingletonId, FrontendId)
+#endif
+
+GALOIS_FIELD_TYPE("__zkllvm_field_pallas_base",    GALOIS_FIELD_PALLAS_BASE,      PallasbaseTy,     FPallasbase)
+GALOIS_FIELD_TYPE("__zkllvm_field_pallas_scalar",    GALOIS_FIELD_PALLAS_SCALAR,      PallasscalarTy,     FPallasscalar)
+
+GALOIS_FIELD_TYPE("__zkllvm_field_vesta_base",    GALOIS_FIELD_VESTA_BASE,      VestabaseTy,     FVestabase)
+GALOIS_FIELD_TYPE("__zkllvm_field_vesta_scalar",    GALOIS_FIELD_VESTA_SCALAR,      VestascalarTy,     FVestascalar)
+
+GALOIS_FIELD_TYPE("__zkllvm_field_bls12381_base",  GALOIS_FIELD_BLS12381_BASE,   BLS12381baseTy,   FBLS12381base)
+GALOIS_FIELD_TYPE("__zkllvm_field_bls12381_scalar",  GALOIS_FIELD_BLS12381_SCALAR,   BLS12381scalarTy,   FBLS12381scalar)
+
+GALOIS_FIELD_TYPE("__zkllvm_field_curve25519_base",GALOIS_FIELD_CURVE25519_BASE, Curve25519baseTy, FCurve25519base)
+GALOIS_FIELD_TYPE("__zkllvm_field_curve25519_scalar",GALOIS_FIELD_CURVE25519_SCALAR, Curve25519scalarTy, FCurve25519scalar)
+
+#undef GALOIS_FIELD_TYPE

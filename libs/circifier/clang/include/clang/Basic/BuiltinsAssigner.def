@@ -1,0 +1,84 @@
+//==- BuiltinsAssigner.def - Assigner Builtin function database ----*- C++ -*-==//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+//
+// This file defines the ZKLLVM Assigner-specific builtin function database.  Users of
+// this file must define the BUILTIN macro to make use of this information.
+//
+//===----------------------------------------------------------------------===//
+
+// The format of this database matches clang/Basic/Builtins.def.
+
+// Possible field types in the signature:
+
+// g1 -> __zkllvm_field_pallas_base
+// g2 -> __zkllvm_field_pallas_scalar
+// g3 -> __zkllvm_field_bls12381_base
+// g4 -> __zkllvm_field_bls12381_scalar
+// g5 -> __zkllvm_field_curve25519_base
+// g6 -> __zkllvm_field_curve25519_scalar
+// g7 -> __zkllvm_field_vesta_base
+// g8 -> __zkllvm_field_vesta_scalar
+
+// Possible curve types in the signature:
+
+// e1 -> __zkllvm_curve_pallas
+// e2 -> __zkllvm_curve_vesta
+// e3 -> __zkllvm_curve_bls12381
+// e4 -> __zkllvm_curve_curve25519
+
+#if defined(BUILTIN) && !defined(TARGET_BUILTIN)
+#   define TARGET_BUILTIN(ID, TYPE, ATTRS, FEATURE) BUILTIN(ID, TYPE, ATTRS)
+#endif
+
+// letters: https://github.com/NilFoundation/zkllvm-circifier/blob/master/clang/include/clang/Basic/Builtins.def#L20
+// numbers: https://github.com/NilFoundation/zkllvm-circifier/blob/master/clang/lib/AST/ASTContext.cpp#L11086-L11118
+BUILTIN(__builtin_assigner_malloc, "v*z", "n")
+BUILTIN(__builtin_assigner_free, "vv*", "n")
+BUILTIN(__builtin_assigner_poseidon_pallas_base, "E3g1E3g1", "n")
+BUILTIN(__builtin_assigner_sha2_256_pallas_base, "E2g1E2g1E2g1", "n")
+BUILTIN(__builtin_assigner_sha2_256_bls12381_base, "g3g3", "n")
+BUILTIN(__builtin_assigner_sha2_512_curve25519, "g6e4e4E4g1", "n")
+BUILTIN(__builtin_assigner_bls12_optimal_ate_pairing, "E12g3e3E4g3", "n")
+BUILTIN(__builtin_assigner_hash_to_curve, "e3g3", "n")
+BUILTIN(__builtin_assigner_is_in_g1_check, "be3", "n")
+BUILTIN(__builtin_assigner_is_in_g2_check, "bE4g3", "n")
+BUILTIN(__builtin_assigner_gt_multiplication, "E12g3E12g3E12g3", "n")
+BUILTIN(__builtin_assigner_zkml_convolution, "v**v**v**z", "n")
+BUILTIN(__builtin_assigner_zkml_pooling, "v**v**z", "n")
+BUILTIN(__builtin_assigner_zkml_ReLU, "ff", "n")
+BUILTIN(__builtin_assigner_zkml_batch_norm, "v**v**", "n")
+BUILTIN(__builtin_assigner_pallas_curve_init, "e1g1g1", "n")
+BUILTIN(__builtin_assigner_vesta_curve_init, "e2g7g7", "n")
+BUILTIN(__builtin_assigner_bls12381_curve_init, "e3g3g3", "n")
+BUILTIN(__builtin_assigner_curve25519_curve_init, "e4g5g5", "n")
+
+BUILTIN(__builtin_assigner_bit_decomposition, "vv*UiULLib", "n")
+BUILTIN(__builtin_assigner_bit_decomposition_pallas, "vv*Uig1b", "n")
+BUILTIN(__builtin_assigner_bit_decomposition_bls12381, "vv*Uig3b", "n")
+BUILTIN(__builtin_assigner_bit_composition, "g1v*Uib", "n")
+
+BUILTIN(__builtin_assigner_exit_check, "vb", "n")
+BUILTIN(__builtin_assigner_exit_check_eq_pallas, "vg1g1", "n")
+
+BUILTIN(__builtin_assigner_print_native_pallas_field, "vg1", "n")
+
+// builtins related to placeholder prover
+BUILTIN(__builtin_assigner_fri_lin_inter, "g1g1g1g1g1", "n")
+BUILTIN(__builtin_assigner_fri_cosets, "vv*Uig1g1", "n")
+BUILTIN(__builtin_assigner_fri_array_swap, "vv*Uiv*b", "n")
+BUILTIN(__builtin_assigner_gate_arg_verifier, "g1v*Ci*Uiv*Uig1", "n") // selectors, gates_sizes, gates_amouts, constraints, constraints_amount, theta
+BUILTIN(__builtin_assigner_permutation_arg_verifier, "E3g1v*v*v*Uig1g1g1g1g1E2g1", "n") // f, se, sigma, length of vectors, L0, V, V_zeta, q_last, q_pad, thetas
+BUILTIN(__builtin_assigner_lookup_arg_verifier, "E4g1i*Uii*Uii*Uii*Uiv*Uiv*Uiv*Uiv*Uiv*Uiv*Uiv*Uiv*Uiv*Uig1g1g1g1E2g1E2g1E2g1", "n")
+//  lookup_table_lookup_options_sizes, lookup_table_columns_numbers, lookup_gate_constraints_sizes, lookup_gate_constraints_lookup_input_sizes, + length of every vector,
+// alphas, lookup_gate_selectors, lookup_gate_constraints_table_ids, lookup_gate_constraints_lookup_inputs, lookup_table_selectors, lookup_table_lookup_options, shifted_lookup_table_selectors, shifted_lookup_table_lookup_options, sorted, + length of every vector,
+// theta, beta, gamma, L0,
+// V_L_values, q_last, q_blind
+// builtins related to placeholder prover
+
+#undef BUILTIN
+#undef TARGET_BUILTIN
