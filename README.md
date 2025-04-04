@@ -54,13 +54,13 @@ make -C ${zkllvm_BUILD:-build} assigner clang -j$(nproc)
 
 注: 这里使用AES128.cpp以及AES128.inp作为样例演示
 
-**1. 编译器读入测试样例AES128.cpp并在build/examples/cpp文件夹中生成 AES128.ll的IR文件**
+**1. 编译器读入测试样例AES128.cpp并在build/examples/cpp文件夹中生成IR文件AES128.ll**
 
 ```bash
 make -C ${zkllvm_BUILD:-build} AES128 -j$(nproc)
 ```
 
- **2. 编译器读入测试样例IR文件, 输出相应的算术电路文本文件AES128.arith以及R1CS文本文件AES128.r1cs**
+ **2. 编译器读入测试样例IR文件AES128.ll, 输出相应的算术电路文本文件AES128.arith以及R1CS文本文件AES128.r1cs**
 ```bash
 ${zkllvm_BUILD:-build}/bin/assigner/assigner -b ${zkllvm_BUILD:-build}/examples/cpp/AES128.ll -i examples/inputs/AES128.inp -c AES128.arith -o AES128.in -r AES128.r1cs
 ```
