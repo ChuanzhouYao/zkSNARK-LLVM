@@ -52,7 +52,7 @@ make -C ${zkllvm_BUILD:-build} assigner clang -j$(nproc)
 
 ### 测试用例
 
-注: 这里使用.cpp以及add1.inp作为样例演示
+注: 这里使用AES128.cpp以及AES128.inp作为样例演示
 
 **1. 编译器生成读入测试样例AES128.cpp并在build/examples/cpp文件夹中生成 AES128.ll的IR文件**
 
