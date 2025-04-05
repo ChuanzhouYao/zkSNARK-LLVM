@@ -37,12 +37,19 @@ sudo apt install build-essential libssl-dev cmake clang-12 git curl pkg-config
 
 ### 部署步骤
 
-#### **1. 配置CMake**
+#### **1. 克隆存储库**
+
+```bash
+cmake -G "Unix Makefiles" -B ${zkllvm_BUILD:-build} -DCMAKE_BUILD_TYPE=Release .
+cd zkSNARK-LLVM
+```
+
+#### **2. 配置CMake**
 
 ```bash
 cmake -G "Unix Makefiles" -B ${zkllvm_BUILD:-build} -DCMAKE_BUILD_TYPE=Release .
 ```
-#### **2. 构建编译器**
+#### **3. 构建编译器**
 
 注: 在构建编译器前需要将测试样例 .cpp文件放入examples/cpp文件夹中, 将.inp文件放入examples/inputs文件夹中
 
