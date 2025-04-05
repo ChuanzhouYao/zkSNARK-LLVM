@@ -40,7 +40,7 @@ sudo apt install build-essential libssl-dev cmake clang-12 git curl pkg-config
 #### **1. 克隆存储库**
 
 ```bash
-cmake -G "Unix Makefiles" -B ${zkllvm_BUILD:-build} -DCMAKE_BUILD_TYPE=Release .
+git clone https://github.com/ChuanzhouYao/zkSNARK-LLVM.git
 cd zkSNARK-LLVM
 ```
 
