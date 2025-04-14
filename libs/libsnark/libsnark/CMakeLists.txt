@@ -677,17 +677,17 @@ target_link_libraries(
 )
 
 
-file(MAKE_DIRECTORY jsnark_interface)
+file(MAKE_DIRECTORY zkllvm_interface)
 
 add_executable(
   run_ppzksnark
 
-  jsnark_interface/json.hpp
-  jsnark_interface/Util.hpp
-  jsnark_interface/Util.cpp
-  jsnark_interface/CircuitReader.hpp
-  jsnark_interface/CircuitReader.cpp
-  jsnark_interface/run_ppzksnark.cpp
+  zkllvm_interface/json.hpp
+  zkllvm_interface/Util.hpp
+  zkllvm_interface/Util.cpp
+  zkllvm_interface/CircuitReader.hpp
+  zkllvm_interface/CircuitReader.cpp
+  zkllvm_interface/run_ppzksnark.cpp
 )
 target_link_libraries(
   run_ppzksnark
@@ -697,9 +697,9 @@ target_link_libraries(
 
 set_target_properties(run_ppzksnark
     PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "jsnark_interface/"
-    LIBRARY_OUTPUT_DIRECTORY "jsnark_interface/"
-    RUNTIME_OUTPUT_DIRECTORY "jsnark_interface/"
+    ARCHIVE_OUTPUT_DIRECTORY "zkllvm_interface/"
+    LIBRARY_OUTPUT_DIRECTORY "zkllvm_interface/"
+    RUNTIME_OUTPUT_DIRECTORY "zkllvm_interface/"
 )
 
 include(CTest)
