@@ -1823,7 +1823,7 @@ void print_circuit(std::vector<std::string> &circuit, const std::string& Circuit
     //--------
 }
 void print_R1CS(const std::string& CircuitName, const std::string& OutputFileName, const std::string& R1CSOutFile){
-    std::string command = "libs/libsnark/build/libsnark/jsnark_interface/run_ppzksnark";
+    std::string command = "libs/libsnark/build/libsnark/zkllvm_interface/run_ppzksnark";
     command = command + " " + CircuitName + " " + OutputFileName + " " + R1CSOutFile;
     std::stringstream output;
 
